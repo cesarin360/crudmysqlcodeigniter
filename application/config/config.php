@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://3.95.222.181/crudmysqlcodeigniter/index.php/';
-$config['base_url_edit'] = 'http://3.95.222.181/crudmysqlcodeigniter/';
+//$config['base_url_edit'] = 'http://3.95.222.181/crudmysqlcodeigniter/';
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'spanish';
+$config['language']	= 'english';
 
 /*
 |--------------------------------------------------------------------------

@@ -58,3 +58,4 @@ $route['usuario/update/(:num)'] = 'user/Edit/update/$1';
 $route['usuario/delete/(:num)'] = 'user/Main/delete/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['alumno/post'] = 'api/Api/index_post';
