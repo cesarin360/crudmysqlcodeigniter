@@ -374,8 +374,8 @@ class CI_Encryption {
 		{
 			return FALSE;
 		}
-
-		isset($params['key']) OR $params['key'] = $this->hkdf($this->_key, 'sha512', NULL, self::strlen($this->_key), 'encryption');
+		
+		isset($params['key']) OR $params['key'] = $this->hkdf($this->_key, 'sha512', NULL, NULL, 'encryption');
 
 		if (($data = $this->{'_'.$this->_driver.'_encrypt'}($data, $params)) === FALSE)
 		{
@@ -863,7 +863,8 @@ class CI_Encryption {
 			return FALSE;
 		}
 
-		self::strlen($salt) OR $salt = str_repeat("\0", $this->_digests[$digest]);
+		try{
+			self::strlen($salt) OR $salt = str_repeat("\0", $this->_digests[$digest]);
 
 		$prk = hash_hmac($digest, $key, $salt, TRUE);
 		$key = '';
@@ -872,6 +873,8 @@ class CI_Encryption {
 			$key_block = hash_hmac($digest, $key_block.$info.chr($block_index), $prk, TRUE);
 			$key .= $key_block;
 		}
+		}catch(\Exception $e){}
+		
 
 		return self::substr($key, 0, $length);
 	}
@@ -909,9 +912,13 @@ class CI_Encryption {
 	 */
 	protected static function strlen($str)
 	{
-		return (self::$func_overload)
-			? mb_strlen($str, '8bit')
-			: strlen($str);
+		if ($str != null)
+		{
+			return (self::$func_overload)
+			? mb_strlen($str, '8bit') : strlen($str);
+		}else{
+			return null;
+		}
 	}
 
 	// --------------------------------------------------------------------
